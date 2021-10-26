@@ -3,9 +3,15 @@ const router = express.Router();
 
 const usersModuleRoutes = require('../modules/users/routes');
 /* GET home page. */
-router.use('/',(req, res) => {
+router.get('/',(req, res) => {
     res.send('Bienvendo a la API de AWUI');
 })
+
+// users
 router.use('/account',usersModuleRoutes.accountRouter);
+router.use('/users/awui/control',usersModuleRoutes.usersAwuiRouter);
+router.use('/users/awui/branch',usersModuleRoutes.usersBranchRouter);
+
+//
 
 module.exports = router;
