@@ -1,5 +1,6 @@
 const {createPool} = require('mysql2');
 const config = require('../config/config');
+const database = require('./database');
 
 const connection = createPool({
     host:config.DB_HOST,
@@ -14,21 +15,23 @@ const connection = createPool({
  * @param {Array} parameters 
  */
 function query(query, parameters = []) {
-    return new Promise((resolve, reject) => {
-        connection.getConnection((err, conn) => {
-            if(err) return reject(err);
-            conn.query(query, parameters, (err, rows, fields) => {
-                resolve(rows);
-            });
-            conn.release();
-        });
-    });
+    return database.query(connection,query,parameters);
 }
 
-const database = {
+/**
+ * 
+ * @param {string}  query 
+ * @param {Array} parameters 
+ */
+function execute(query, parameters = []){
+    return execute(connection, query, parameters);
+}
+
+const databaseControl = {
     connection,
     query,
+    execute
 }
 
 
-module.exports = database;
+module.exports = databaseControl;
