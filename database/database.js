@@ -1,4 +1,17 @@
 'use strict';
+const mysql2 = require('mysql2');
+
+
+function createConnection({host,database, user, password}){
+    const connection = mysql2.createPool({
+        host,
+        database,
+        user,
+        password
+    });
+
+    return connection;
+}
 
 /**
  * @param {any} connection
@@ -34,5 +47,6 @@ function execute(connection,query, parameters = []){
     });
 }
 
+exports.createConnection = createConnection;
 exports.query = query;
 exports.execute = execute;

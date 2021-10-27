@@ -1,8 +1,7 @@
-const {createPool} = require('mysql2');
 const config = require('../config/config');
 const database = require('./database');
 
-const connection = createPool({
+const connection = database.createConnection({
     host:config.DB_HOST,
     database: config.DB_AWUI_DATABASE,
     user: config.DB_USER,

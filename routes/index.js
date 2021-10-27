@@ -1,3 +1,5 @@
+"use strict";
+
 const express = require('express');
 const router = express.Router();
 
@@ -9,9 +11,7 @@ router.get('/',(req, res) => {
 
 // users
 router.use('/account',usersModuleRoutes.accountRouter);
-router.use('/users/awui/control',usersModuleRoutes.usersAwuiRouter);
 router.use('/users/awui/branch',usersModuleRoutes.usersBranchRouter);
-
 //
 
 module.exports = router;
